@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h2>Profile</h2>
+
+    <label for="hoten">Họ tên:</label>
+    <input type="text" name="hoten" id="hoten" placeholder="ho va ten">
+    <br>
+    <label for="namsinh">Năm sinh:</label>
+    <input type="date" name="namsinh" id="namsinh">
+    <br>
+    <!-- <label for="taikhoan">Tài khoản:</label>
+    <input type="email" name="taikhoan" id="username">
+    <br>
+    <label for="matkhau">Mật khẩu:</label>
+    <input type="password" name="matkhau" id="matkhau">
+    <br> -->
+    <label for="sex">Giới tính:</label>
+    <br>
+    <input type="radio" name="Nam" id="Nam">
+    <label for="Nam">Nam</label>
+    <br>
+    <input type="radio" name="Nu" id="Nu">
+    <label for="Nu">Nữ</label>
+    <br>
+    <label for="quocgiaa">Quốc gia:</label>
+    <br>
+    <select name="quocgia" id="quocgiaa">
+        <option value="vietnam">Việt Nam</option>
+        <option value="Thái Lan">Thái Lan</option>
+        <option value="Indo">Indo</option>
+    </select>
+    <button id="saveProfile">save</button>
+</body>
+
+</html>
+
+<script>
+    document.getElementById("namsinh").defaultValue = "2023-02-09";
+    const myProfile = createStorage('myProfile')
+    let btnSave = document.getElementById("saveProfile")
+    btnSave.addEventListener('click', () => {
+        // if()
+        myProfile.set('avt', 'example')
+        // myProfile.getItem('avt', 'example')
+    })
+
+
+    function createStorage(key) {
+        const store = JSON.parse(localStorage.getItem(key)) || {}
+        const save = () => {
+            localStorage.setItem(key, JSON.stringify(store))
+        }
+        const storege = {
+            get(key) {
+                return store[key] || {}
+            },
+            getFull() {
+                return store || {}
+            },
+            set(key, value = '') {
+                if (!key) return
+                store[key] = value
+                save()
+            },
+            remove(key) {
+                delete store[key]
+                save()
+            },
+        }
+        return storege
+    }
+</script>
+<script src="./example"></script>
